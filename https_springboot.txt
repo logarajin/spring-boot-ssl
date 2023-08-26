@@ -1,0 +1,9 @@
+keytool -genkeypair -keyalg RSA -keysize 2048 -alias stackoverflow -dname "CN=stackoverflow,OU=Hakan,O=Hakan,C=NL" -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -validity 3650 -storepass password -keypass password -keystore identity.jks -deststoretype pkcs12
+
+keytool -importkeystore -srckeystore identity.jks -destkeystore springboot.p12 -deststoretype pkcs12
+
+
+keytool -export -keystore springboot.p12 -alias stackoverflow -file myCertificate.crt
+
+
+keytool -importcert -file myCertificate.crt -alias springboot -keystore C:/Program Files/Java/jdk-17.0.1/lib/security/cacerts
